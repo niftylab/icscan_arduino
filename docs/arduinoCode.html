@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dataTransfer.ino &mdash; bitStream 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="test.yml" href="yaml.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> bitStream
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="setup.html">setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pythonCode.html">makeStream.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="yaml.html">test.yml</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">dataTransfer.ino</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#clk-data-en-rst">CLK, DATA, EN, RST핀</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">수정해줘야 하는 변수</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">bitStream</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>dataTransfer.ino</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/arduinoCode.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="datatransfer-ino">
+<h1>dataTransfer.ino<a class="headerlink" href="#datatransfer-ino" title="Permalink to this headline"></a></h1>
+<section id="overview">
+<h2>overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
+<ol class="arabic">
+<li><p>시리얼 통신을 통해 비트스트림을 컴퓨터로부터 받아오고 그 스트림을 칩에 보낸다.</p></li>
+<li><p>실행 환경: 아두이노 우노, SPI.h 모듈 필요(웬만해선 아두이노 ide 설치할 때 기본으로 깔려있음)</p></li>
+<li><p>프로그램 실행순서</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">step1</dt>
+<dd class="field-odd"><p>변수, 핀, 통신 초기화</p>
+</dd>
+<dt class="field-even">step2</dt>
+<dd class="field-even"><p>컴퓨터에서 시리얼 통신으로 데이터가 올 때 까지 대기</p>
+</dd>
+<dt class="field-odd">step3</dt>
+<dd class="field-odd"><p>받은 값 컴퓨터에 재전송(재대로 받았는 지 확인하기 위해서)</p>
+</dd>
+<dt class="field-even">step4</dt>
+<dd class="field-even"><p>받아온 비트스트림을 SPI통신을 통해 칩으로 전송</p>
+</dd>
+<dt class="field-odd">step5</dt>
+<dd class="field-odd"><p>컴퓨터에 SPI통신이 끝났음을 알림</p>
+</dd>
+<dt class="field-even">step6</dt>
+<dd class="field-even"><p>step2로 돌아감</p>
+</dd>
+</dl>
+</div></blockquote>
+</li>
+</ol>
+</section>
+<section id="clk-data-en-rst">
+<h2>CLK, DATA, EN, RST핀<a class="headerlink" href="#clk-data-en-rst" title="Permalink to this headline"></a></h2>
+<ol class="arabic">
+<li><p>CLK: 13번핀, DATA: 11번핀, EN: 10번핀, RST: 9번핀</p></li>
+<li><p>초기 상태  -&gt; CLK : IDLE,  DATA: X,  EN: LOW,  RST: LOW</p></li>
+<li><p>SPI 통신단계</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">step1</dt>
+<dd class="field-odd"><p>통신시작 전 RST핀에서 펄스 출력</p>
+</dd>
+<dt class="field-even">step2</dt>
+<dd class="field-even"><p>EN핀을 HIGH로 올리고 데이터 전송 시작</p>
+</dd>
+<dt class="field-odd">step3</dt>
+<dd class="field-odd"><p>데이터 전송 후 EN핀을 LOW로 내리고 통신 끝</p>
+</dd>
+</dl>
+</div></blockquote>
+</li>
+</ol>
+</section>
+<section id="id1">
+<h2>수정해줘야 하는 변수<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h2>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt>_MAXBYTES:</dt><dd><ul class="simple">
+<li><p>한번에 보내고 싶은 최대 바이트 수</p></li>
+<li><p>최대 255까지 가능( 더 늘리고 싶다면 코드를 수정해야 함)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>SPI_MODE:</dt><dd><ul class="simple">
+<li><p>clk의 idle 값, falling/rising edge transfer 를 정할 수 있다.</p></li>
+<li><p>SPI_MODE0: CLK idle = low, bit transfer = rising edge</p></li>
+<li><p>SPI_MODE1: CLK idle = low, bit transfer = falling edge</p></li>
+<li><p>SPI_MODE2: CLK idle = HIGH, bit transfer = falling edge</p></li>
+<li><p>SPI_MODE3: CLK idle = HIGH, bit transfer = rising edge</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>MSBFIRST/LSBFIRST:</dt><dd><ul class="simple">
+<li><p>most/least significant bit first</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="yaml.html" class="btn btn-neutral float-left" title="test.yml" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, hjpark.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

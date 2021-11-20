@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>makeStream.py &mdash; bitStream 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="test.yml" href="yaml.html" />
+    <link rel="prev" title="setup" href="setup.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> bitStream
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="setup.html">setup</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">makeStream.py</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">실행환경</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">프로그램 실행 단계</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="yaml.html">test.yml</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arduinoCode.html">dataTransfer.ino</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">bitStream</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>makeStream.py</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/pythonCode.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="makestream-py">
+<h1>makeStream.py<a class="headerlink" href="#makestream-py" title="Permalink to this headline"></a></h1>
+<section id="overview">
+<h2>overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>같은 폴더에 있는 ‘test.yml’파일을 읽고 비트스트림을 만들어 시리얼 통신을 통해 아두이노로 보낸다.</p></li>
+<li><p>비트스트림은 MSB first 기준으로 만든다.</p></li>
+</ul>
+</section>
+<section id="id1">
+<h2>실행환경<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p>윈도우, python3, PyYAML모듈, PySerial모듈이 필요하다.</p></li>
+<li><p>idle: 기본 python idle가능, vscode는 Python, Python for VSCode extension이 설치되어 있는 상황에서 실행함.</p></li>
+</ul>
+</section>
+<section id="id2">
+<h2>프로그램 실행 단계<a class="headerlink" href="#id2" title="Permalink to this headline"></a></h2>
+<dl class="field-list simple">
+<dt class="field-odd">step1</dt>
+<dd class="field-odd"><p>test.yml 파일 읽어오기</p>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test.yml&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">bit</span><span class="p">:</span>
+<span class="n">stream</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">bit</span><span class="p">,</span><span class="n">Loader</span><span class="o">=</span><span class="n">yaml</span><span class="o">.</span><span class="n">FullLoader</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">step2</dt>
+<dd class="field-odd"><p>시리얼 통신 연결 및 초기화</p>
+</dd>
+</dl>
+<p>Serial( ‘COMx’, 115200 ) 에서 ‘COMx’값은 setup페이지에서 “시리얼 포트 설정” 항목 참조에서 확인하고 같은 값으로 바꿔준다.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ser</span> <span class="o">=</span> <span class="n">serial</span><span class="o">.</span><span class="n">Serial</span><span class="p">(</span><span class="s1">&#39;COM4&#39;</span><span class="p">,</span> <span class="mi">115200</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">ser</span><span class="o">.</span><span class="n">readable</span><span class="p">():</span>
+   <span class="n">ser</span><span class="o">.</span><span class="n">read</span><span class="p">()</span> <span class="c1"># to clear buffer</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">step3</dt>
+<dd class="field-odd"><p>test.yml 에서 읽어온 데이터로 비트스트림 생성 및 아두이노로 송신</p>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">seg</span> <span class="ow">in</span> <span class="n">stream</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">8</span><span class="p">):</span>
+        <span class="n">bitStream</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">bitStream</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">|</span> <span class="p">(</span><span class="n">seg</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="mi">7</span><span class="o">-</span><span class="n">i</span><span class="p">)</span> <span class="p">)</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="o">...</span>
+<span class="n">ser</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">bitStream</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">step4</dt>
+<dd class="field-odd"><p>올바른 데이터를 보냈는지 체크</p>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">compare</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">datalen</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">bitStream</span><span class="p">[</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span> <span class="p">]</span> <span class="o">!=</span> <span class="n">receive</span><span class="p">[</span> <span class="n">i</span> <span class="p">]:</span>
+        <span class="n">compare</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="c1">#if compare == true -&gt; correct data</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">step5</dt>
+<dd class="field-odd"><p>아두이노에서 칩으로 데이터를 보냈는지 체크</p>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">ser</span><span class="o">.</span><span class="n">in_waiting</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="n">receive</span> <span class="o">=</span> <span class="n">ser</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">receive</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;spi communication complete&quot;</span><span class="p">)</span>
+        <span class="n">readMode</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;error! something wrong between arduino and chip&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">receive</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">exit</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">step6</dt>
+<dd class="field-odd"><p>모두 정상이면 step3으로 돌아가 반복</p>
+</dd>
+</dl>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="setup.html" class="btn btn-neutral float-left" title="setup" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="yaml.html" class="btn btn-neutral float-right" title="test.yml" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, hjpark.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
