@@ -1,5 +1,5 @@
-docs/_build/*
-docs/_static/*
-docs/_templates/*
 .vscode
 readMe.txt
+docs_source/_build/*
+docs_source/_static/*
+docs_source/_templates/*
