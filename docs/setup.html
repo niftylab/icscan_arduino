@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>setup &mdash; bitStream 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="makeStream.py" href="pythonCode.html" />
+    <link rel="prev" title="BitStream_Transceiver" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> bitStream
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">setup</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">파이썬 모듈 설치 방법 (윈도우 기준)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">설치가 안될 시</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">시리얼 포트 설정</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pythonCode.html">makeStream.py</a></li>
+<li class="toctree-l1"><a class="reference internal" href="yaml.html">test.yml</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arduinoCode.html">dataTransfer.ino</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">bitStream</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>setup</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/setup.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="setup">
+<h1>setup<a class="headerlink" href="#setup" title="Permalink to this headline"></a></h1>
+<section id="id1">
+<h2>파이썬 모듈 설치 방법 (윈도우 기준)<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h2>
+<dl class="field-list simple">
+<dt class="field-odd">step1</dt>
+<dd class="field-odd"><p>cmd를 관리자 권한으로 실행</p>
+</dd>
+<dt class="field-even">step2</dt>
+<dd class="field-even"><p>pip install PyYAML 입력</p>
+</dd>
+<dt class="field-odd">step3</dt>
+<dd class="field-odd"><p>pip install PySerial 입력</p>
+</dd>
+</dl>
+</section>
+<section id="id2">
+<h2>설치가 안될 시<a class="headerlink" href="#id2" title="Permalink to this headline"></a></h2>
+<dl class="field-list simple">
+<dt class="field-odd">step1</dt>
+<dd class="field-odd"><p>pip PATH가 설정돼있는지 확인</p>
+</dd>
+</dl>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Python3:</dt><dd><ul>
+<li><p>C:\Users\UserName\AppData\Local\Programs\Python\Python38\Scripts</p></li>
+<li><p>보통 Python\Python38\Script 에 저장되어 있음</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Anaconda3:</dt><dd><ul>
+<li><p>c:\ProgramData\Anaconda3\Scripts</p></li>
+<li><p>단 필자는 아나콘다로 실행해본 적은 없음</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">step2</dt>
+<dd class="field-odd"><p>pip가 설치돼있는지 확인</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>‘venvLib’ 이런 경로에 있는 파일이 아니라 위 경로와 비슷한 경로에 설치돼있어야 한다.
+만약 안돼있다면 <a class="reference external" href="https://dora-guide.com/pip-install/">링크</a> 참조</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">step3</dt>
+<dd class="field-odd"><p>설치 후, <strong>step1</strong> 다시 시도</p>
+</dd>
+</dl>
+</section>
+<section id="id4">
+<h2>시리얼 포트 설정<a class="headerlink" href="#id4" title="Permalink to this headline"></a></h2>
+<dl class="field-list simple">
+<dt class="field-odd">step1</dt>
+<dd class="field-odd"><p>아두이노와 컴퓨터 usb연결</p>
+</dd>
+<dt class="field-even">step2</dt>
+<dd class="field-even"><p>장치 관리자 -&gt; 포트 -&gt; Arduino Uno(COMx) -&gt; 포트 설정</p>
+</dd>
+<dt class="field-odd">step3</dt>
+<dd class="field-odd"><p>설정 내용 -&gt; 비트/초: 115200, 데이터 비트: 8, 패리티: 없음, 정지 비트: 1, 흐름 제어: 없음</p>
+</dd>
+</dl>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="BitStream_Transceiver" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pythonCode.html" class="btn btn-neutral float-right" title="makeStream.py" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, hjpark.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
